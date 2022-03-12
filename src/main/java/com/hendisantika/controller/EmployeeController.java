@@ -47,4 +47,9 @@ public class EmployeeController {
     public void removeCache() {
         employeeService.evictCache();
     }
+
+    @GetMapping("/cache-manager")
+    public void cacheManager() {
+        employeeService.cacheManager();
+    }
 }
