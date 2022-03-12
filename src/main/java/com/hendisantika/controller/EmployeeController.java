@@ -42,4 +42,9 @@ public class EmployeeController {
     public List<Employee> getAllEmployees() {
         return employeeService.getAllEmployees();
     }
+
+    @GetMapping("/evict")
+    public void removeCache() {
+        employeeService.evictCache();
+    }
 }
