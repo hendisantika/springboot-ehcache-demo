@@ -5,6 +5,7 @@ import com.hendisantika.repository.EmployeeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -42,5 +43,10 @@ public class EmployeeService {
     @Cacheable()
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
+    }
+
+    @CacheEvict(cacheNames = {"demoCache"}, allEntries = true)
+    public void evictCache() {
+        log.info("Evict all cache entries...");
     }
 }
