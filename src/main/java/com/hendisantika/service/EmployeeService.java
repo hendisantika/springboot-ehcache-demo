@@ -9,6 +9,7 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -36,5 +37,10 @@ public class EmployeeService {
     @Cacheable(key = "#id")
     public Optional<Employee> getEmployeeById(int id) {
         return employeeRepository.findById(id);
+    }
+
+    @Cacheable()
+    public List<Employee> getAllEmployees() {
+        return employeeRepository.findAll();
     }
 }
