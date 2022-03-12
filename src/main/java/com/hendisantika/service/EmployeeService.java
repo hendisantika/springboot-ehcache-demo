@@ -6,7 +6,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 /**
  * Created by IntelliJ IDEA.
@@ -26,10 +29,12 @@ public class EmployeeService {
 
     @CachePut(key = "#result.id")
     public Employee saveAction(Employee emp) {
-
         Employee saveDemp = employeeRepository.save(emp);
-
         return saveDemp;
+    }
 
+    @Cacheable(key = "#id")
+    public Optional<Employee> getEmployeeById(int id) {
+        return employeeRepository.findById(id);
     }
 }
