@@ -1,9 +1,11 @@
 package com.hendisantika.service;
 
+import com.hendisantika.entity.Employee;
 import com.hendisantika.repository.EmployeeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 
 /**
@@ -22,4 +24,12 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    @CachePut(key = "#result.id")
+    public Employee saveAction(Employee emp) {
+
+        Employee saveDemp = employeeRepository.save(emp);
+
+        return saveDemp;
+
+    }
 }
