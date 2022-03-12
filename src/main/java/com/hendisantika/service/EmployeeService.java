@@ -4,6 +4,8 @@ import com.hendisantika.entity.Employee;
 import com.hendisantika.repository.EmployeeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -27,6 +29,9 @@ import java.util.Optional;
 @CacheConfig(cacheNames = "demoCache")
 public class EmployeeService {
     @Autowired
+    private CacheManager cacheManager;
+
+    @Autowired
     private EmployeeRepository employeeRepository;
 
     @CachePut(key = "#result.id")
@@ -48,5 +53,11 @@ public class EmployeeService {
     @CacheEvict(cacheNames = {"demoCache"}, allEntries = true)
     public void evictCache() {
         log.info("Evict all cache entries...");
+    }
+
+    public void cacheManager() {
+        Cache cache = cacheManager.getCache("demoCache");
+        Employee emp = (Employee) cache.get(25).get();
+        log.info("from the cacheManager = " + emp);
     }
 }
