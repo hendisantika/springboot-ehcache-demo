@@ -21,3 +21,34 @@ curl --location --request POST 'http://localhost:8080/employee' \
     "tech": "Tim 1"
 }'
 ```
+
+List All Employee
+
+![List All Employee](img/list.png "List All Employee")
+
+![List All Employee](img/list2.png "List All Employee")
+
+```shell
+curl --location --request GET 'http://localhost:8080/employee' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "Uzumaki Naruto",
+    "tech": "Tim 1"
+}'
+```
+
+Find Employee By ID
+
+![Find Employee By ID](img/byid.png "Find Employee By ID")
+
+```shell
+curl --location --request GET 'http://localhost:8080/employee/1'
+```
+
+Evict the Cache
+
+![Evict the Cache](img/evict.png "Evict the Cache")
+
+```shell
+curl --location --request GET 'http://localhost:8080/employee/evict'
+```
