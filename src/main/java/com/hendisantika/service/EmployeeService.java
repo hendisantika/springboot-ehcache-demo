@@ -57,7 +57,7 @@ public class EmployeeService {
 
     public void cacheManager() {
         Cache cache = cacheManager.getCache("demoCache");
-        Employee emp = (Employee) cache.get(25).get();
+        Employee emp = (Employee) cache.get(5).get();
         log.info("from the cacheManager = " + emp);
     }
 }
